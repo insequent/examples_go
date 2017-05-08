@@ -1,0 +1,13 @@
+{
+    "Masters": "127.0.0.1, 172.168.1.1",
+    "ReadTimeout": 15,
+    "builtin": {
+        "HTTPOn": true,
+        "DNSOn": true,
+        "DNSPort": 53
+    },
+    "consul": {
+        "server": "192.168.0.1",
+        "port": "8600"
+    }
+}

@@ -1,0 +1,8 @@
+description: fruits are delicious
+fruits:
+  apple:
+    - red
+    - sweet
+  lemon:
+    - yellow
+    - sour

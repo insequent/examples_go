@@ -1,8 +1,0 @@
-package: github.com/insequent/examples_go/mine/aws
-import:
-- package: aws/s3client
-- package: github.com/aws/aws-sdk-go
-  subpackages:
-  - aws
-  - aws/session
-  - service/s3

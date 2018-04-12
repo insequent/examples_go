@@ -30,6 +30,7 @@ func main() {
 
 	// Split the data into shards
 	shards, _ := enc.Split(data)
+	fmt.Printf("# of shards (%T): %v\n", shards, len(shards))
 
 	// Encode the parity set
 	_ = enc.Encode(shards)

@@ -6,18 +6,30 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/endpoints"
 	"github.com/aws/aws-sdk-go/aws/session"
 	s3sdk "github.com/aws/aws-sdk-go/service/s3"
 )
 
 func New() (s *S3Client) {
+	CustomResolver := func(service, region string, optFns ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
+		if service == endpoints.S3ServiceID {
+			return endpoints.ResolvedEndpoint{
+				URL: "https://s-us-central-1-staging.objectstorage.io",
+			}, nil
+		}
+
+		return endpoints.DefaultResolver().EndpointFor(service, region, optFns...)
+	}
+
 	cfg := aws.Config{
-		LogLevel: aws.LogLevel(aws.LogDebugWithSigning),
-		Region:   aws.String("us-west-2"),
+		EndpointResolver: endpoints.ResolverFunc(CustomResolver),
+		LogLevel:         aws.LogLevel(aws.LogDebugWithSigning),
+		Region:           aws.String("us-central-1"),
 	}
 	opts := session.Options{
 		Config:  cfg,
-		Profile: "amazon",
+		Profile: "bob",
 	}
 	ses := session.Must(session.NewSessionWithOptions(opts))
 	svc := s3sdk.New(ses)

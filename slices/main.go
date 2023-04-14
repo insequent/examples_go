@@ -4,6 +4,10 @@ import (
 	"fmt"
 )
 
+func addToSlice(slice *[]string, str string) {
+	*slice = append(*slice, str)
+}
+
 func main() {
 	blah := []string{
 		"this",
@@ -43,4 +47,10 @@ func main() {
 
 	fmt.Println("Test2:", test2)
 	fmt.Println("Blah:", blah)
+
+	// Slice elements are passed by reference, but the slice as a whole is not.
+	// You need to pass a pointer if you want to change a slice by function call
+	test3 := []string{"a", "b", "c"}
+	addToSlice(&test3, "d")
+	fmt.Println("Test3:", test3)
 }

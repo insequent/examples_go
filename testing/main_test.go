@@ -1,18 +1,37 @@
 package main
 
 import (
-	"fmt"
-	"os"
 	"testing"
 )
 
-func TestBlue(t *testing.T) {
-	fmt.Println("Running TestBlue")
-	os.Setenv("TEST_VAR", "blue")
-	printVar()
+func TestRandomString(t *testing.T) {
+	for i := 0; i < 10; i++ {
+		str := randomString(i)
+
+		if len(str) != i {
+			t.Fatalf("Unexpected length returned by randomString(): %d", len(str))
+		}
+	}
 }
 
-func TestDefault(t *testing.T) {
-	fmt.Println("Running TestDefault")
-	printVar()
+func TestRandomBytes(t *testing.T) {
+	for i := 0; i < 10; i++ {
+		b := randomBytes(i)
+
+		if len(b) != i {
+			t.Fatalf("Unexpected length returned by randomBytes(): %d", len(b))
+		}
+	}
+}
+
+func BenchmarkRandomString(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		randomString(n)
+	}
+}
+
+func BenchmarkRandomBytes(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		randomBytes(n)
+	}
 }

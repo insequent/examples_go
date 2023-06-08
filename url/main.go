@@ -11,6 +11,7 @@ func printURL(str string) {
 		fmt.Println("\tFragment:", u.Fragment)
 		fmt.Println("\tScheme:", u.Scheme)
 		fmt.Println("\tHost:", u.Host)
+		fmt.Println("\tHostname:", u.Hostname())
 		fmt.Println("\tOpaque:", u.Opaque)
 		fmt.Println("\tPath:", u.Path)
 		fmt.Println("\tRawPath:", u.RawPath)

@@ -3,24 +3,31 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 )
 
-func Print(w http.ResponseWriter, req *http.Request) {
-	log.Println("Request")
-	for key, value := range req.Header {
-		log.Printf("\t%s: %s\n", key, value)
+func Print(w http.ResponseWriter, r *http.Request) {
+	//log.Println("Request")
+	//for key, value := range req.Header {
+	//	log.Printf("\t%s: %s\n", key, value)
+	//}
+
+	blah := r.FormValue("test")
+	if blah != "" {
+		fmt.Println("Blah:", blah)
 	}
 
-	body, err := io.ReadAll(req.Body)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Println("Failed to read request body:", err)
 		w.WriteHeader(http.StatusInternalServerError)
 	}
-	defer req.Body.Close()
-	log.Printf("\tBody:\n%s", string(body))
+	defer r.Body.Close()
+	//log.Printf("\tBody:\n%s", string(body))
+	fmt.Println(string(body))
 }
 
 func main() {
@@ -29,6 +36,6 @@ func main() {
 
 	err := http.ListenAndServe(":8080", mux)
 	if err != nil {
-		log.Println("Error on server stop:", err)
+		fmt.Println("Error on server stop:", err)
 	}
 }

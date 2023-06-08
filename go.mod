@@ -10,6 +10,7 @@ require (
 	github.com/charmbracelet/bubbletea v0.22.1
 	github.com/disintegration/gift v1.2.1
 	github.com/docopt/docopt-go v0.0.0-20180111231733-ee0de3bc6815
+	github.com/google/go-cmp v0.5.8
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/websocket v1.5.0
 	github.com/klauspost/reedsolomon v1.10.0

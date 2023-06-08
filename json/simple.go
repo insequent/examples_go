@@ -21,6 +21,7 @@ type RawTest struct {
 }
 
 func main() {
+	// Basic marshalling/unmarshalling tests
 	in := []byte(`{"A": "1", "C": "3"}`)
 	fmt.Printf("'in': %s\n", in)
 	out := Test{
@@ -37,11 +38,13 @@ func main() {
 	m, _ := json.Marshal(out)
 	fmt.Printf("Marshalled: %+v\n", string(m))
 
+	// RawMessage Tests
 	fmt.Println("\nRaw test...\n")
 
-	nested := []byte("{\"B\":\"text\"}")
-	raw := &RawTest{
-		A: nested,
+	data := []byte("{\"A\":{\"B\":\"text\"}}")
+	raw := &RawTest{}
+	if err := json.Unmarshal(data, raw); err != nil {
+		panic(err)
 	}
 
 	fmt.Println("Marshaled:")
@@ -58,8 +61,10 @@ func main() {
 	fmt.Println("Straight string:", string(raw.A))
 
 	fmt.Println("\nByte slice test...\n")
-	bt := &ByteTest{
-		A: nested,
+
+	bt := &ByteTest{}
+	if err := json.Unmarshal(data, bt); err != nil {
+		panic(err)
 	}
 
 	fmt.Println("Marshaled:")
@@ -74,4 +79,5 @@ func main() {
 	}
 	fmt.Println("Single field marshaled:", string(b))
 	fmt.Println("Straight string:", string(bt.A))
+
 }

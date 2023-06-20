@@ -21,7 +21,7 @@ func Listen(conn *websocket.Conn) {
 }
 
 func main() {
-	url := flag.String("url", "ws://localhost", "The destination URL to initialize a websocket connection to")
+	url := flag.String("url", "ws://127.0.0.1:8060/api/v1/events/stream", "The destination URL to initialize a websocket connection to")
 	username := flag.String("u", "admin", "Username used for authentication")
 	password := flag.String("p", "admin", "Password used for authentication")
 	flag.Parse()

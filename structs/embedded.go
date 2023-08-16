@@ -12,12 +12,8 @@ func (p *Person) SayName() {
 	fmt.Printf("My name is %s\n", p.Name)
 }
 
-func (p *Person) whisper() {
-	fmt.Println("Are children even people?")
-}
-
 type Child struct {
-	Name string
+	Thing string
 	*Person
 }
 
@@ -26,16 +22,17 @@ func (c *Child) SayHi() {
 }
 
 func (c *Child) SayName() {
-	fmt.Printf("My name is %s, and I hate authority\n", c.Name)
-}
-
-func (c *Child) whisper() {
-	fmt.Println("Hey?! What are whispering about??")
+	fmt.Printf("My name is %s, and I like %s\n", c.Name, c.Thing)
 }
 
 func main() {
-	child := &Child{"Chet", &Person{}}
+	child := &Child{
+		Thing:  "butterflies",
+		Person: &Person{Name: "Chad"},
+	}
+	// After declaration, you can address fields of the embedded struct
+	child.Name = "Chet"
+
 	child.SayName()
 	child.SayHi()
-	child.whisper()
 }

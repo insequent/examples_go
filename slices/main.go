@@ -11,9 +11,9 @@ func addToSlice(slice *[]string, str string) {
 func main() {
 	blah := []string{
 		"this",
-		"that",
 		"them",
 		"they",
+		"that",
 	}
 	fmt.Println("Slice:", blah)
 
@@ -23,16 +23,16 @@ func main() {
 
 	// Limited helpers
 	fmt.Println("Removing 'that' from slice...")
-	index := -1
+
 	for i, e := range blah {
 		if e == "that" {
-			index = i
+			if i < len(blah)-1 {
+				blah = append(blah[:i], blah[i+1:]...)
+			} else {
+				blah = blah[:i]
+			}
 		}
 	}
-	if index >= 0 {
-		blah = append(blah[:index], blah[index+1:]...)
-	}
-
 	fmt.Println("Slice:", blah)
 	for i, s := range blah {
 		fmt.Printf("index %d: %v\n", i, s)
